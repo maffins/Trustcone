@@ -1,0 +1,762 @@
+caller EXPR
+caller
+Returns the context of the current subroutine call. In scalar context, returns the caller's package name if there is a caller, that is, if we're in a subroutine or eval or require, and the undefined value otherwise. In list context, returns
+    # 0         1          2
+    ($package, $filename, $line) = caller;
+With EXPR, it returns some extra information that the debugger uses to print a stack trace. The value of EXPR indicates how many call frames to go back before the current one.
+
+    #  0         1          2      3            4
+    ($package, $filename, $line, $subroutine, $hasargs,
+    #  5          6          7            8       9
+    $wantarray, $evaltext, $is_require, $hints, $bitmask) = caller($i);
+
+warn LIST
+Prints the value of LIST to STDERR. If the last element of LIST does not end in a newline, it appends the same file/line number text as die does.	
+
+cvs -d :pserver:striataservice@integration-cvs.svc:/cvsroot co -d cicorrespondence integration/projects/clients/silica/cicorrespondence/ (This will create missing directories and upload files )
+() cvs -d :pserver:striataservice@integration-cvs.lan:/cvsroot co -d  sanlam integration/projects/clients/sanlam/ -l ) when there are issues
+
+perl -c (compile a file, checks for staff such as syntax and all)
+
+on the processing and the build server all configurations are done on the launchtransfermanager.conf files
+
+On the polling side after data is read, and the batch details stored in the database, the files are zipped and placed into the eBilling1-Normal-Remote (remote on box)
+this means the files are ready to be moved to processing. 
+Configuring hte launchtransfermanager on the processing.integration box will direct the file to either processing script or simply just move the file to the out remove directory.
+From there the file moves on to the build box where we again configure the launchtransfermanager.
+- When putting staff into the config file, try to follow alphabetic order.
+
+/usr/local/Striata/perl/bin/perl -c -I /usr/local/Striata/perlserver/servants/demonbuild/ /var/Striata/perl/CustomDataSources/SanlamPAC.pm (This is how we test if the datasource is working after deploying it)
+
+
+The $number eg $1 variables contain the parts of the string that matched the capturing groups in the pattern for your last regex match if the match was successful.
+
+For example, take the following string:
+
+$text = "the quick brown fox jumps over the lazy dog.";
+After the statement
+
+$text =~ m/ (b.+?) /;
+$1 equals the text "brown".
+
+These are called "Match Variables". As previously mentioned they contain the text from your last regular expression match.
+
+HI Clive
+
+As discussed on Hangouts
+
+Answer 1: feedbackloop.handler.pl.
+We looked into the config files and saw it pointing to a LogDir="D:/Striata-local/logs/projects/sanlam/pac/feedback"
+So this gives us a clue that its not setup on the building engine, but on demonmail
+To view these config files you need access to GlobalCVS
+
+https://global-cvs.za.striata.com/viewvc.cgi/za/configs/striata_platforms/eb2.za.striata.com/striata/conf/demonmail/actions.conf?revision=1.9&view=markup
+
+File: 
+/configs/striata_platforms/eb2.za.striata.com/striata/conf/demonmail/actions.conf
+
+Example:
+#Sanlam PAC
+PACNoInternet="C:/Striata/perl/bin/perl.exe" "D:\Striata-local\projects\clients\sanlam\pac\scripts\feedbackloop-handler-no-internet.pl"
+PACUnsubscribe="C:/Striata/perl/bin/perl.exe" "D:\Striata-local\projects\clients\sanlam\pac\scripts\feedbackloop-handler-unsubscribe.pl"
+
+
+/configs/striata_platforms/eb2.za.striata.com/striata/conf/demonmail/mailboxes.conf
+
+
+# -------------------------- SANLAM PAC --------------------------------- #
+pacnointernet@eb2.za.striata.com=PACNoInternet
+pacunsubscribe@eb2.za.striata.com=PACUnsubscribe
+
+2. List of Servers
+
+SFTP (NORMALLY DROP DATA)
+====
+Preprod Secure Transfer - Testing/Dev [preprod-securetransfer.integration.lan]
+Gallium.dmz - UAT
+Platinum.dmz  - DR
+Potassium.dmz  - Live
+Mercury.dmz  - Live
+
+ONLINE 
+Web Integration - Testing/Dev [web.integration.lan]
+Titanium - UAT
+Eris - DR
+Carbon - Live
+
+Building Engine servers:
+
+Preprod EM-BE - Testing/Dev
+Preprod EB-BE - Testing/Dev
+Callisto - UAT
+Neptune.trusted - DR -> EM2
+Ceres.trusted  - DR ->EB2
+Saturn.trusted  - Live ->EM1
+Pluto.trusted  - Live -> EB1
+Palladium - Live
+Titan - Live
+Technetium - Live
+
+Database servers:
+
+Mysql Integration Lan - Testing/Dev [mysql.integration.lan]
+Oberon - UAT
+Caecium - DR
+Triton - Live [mysql-prod-sp.svc]
+
+Examples of simple use in Perl statements
+These examples use very simple regexps only. The intent is just to show contexts where regexps might be used, as well as the effect of some “flags” to matching and replacements. Note in particular that matching is by default case-sensitive (Abc does not match abc unless specified otherwise).
+
+s/foo/bar/;
+replaces the first occurrence of the exact character sequence foo in the “current string” (in special variable $_) by the character sequence bar; for example, foolish bigfoot would become barlish bigfoot
+
+s/foo/bar/g;
+replaces any occurrence of the exact character sequence foo in the “current string” by the character sequence bar; for example, foolish bigfoot would become barlish bigbart
+
+s/foo/bar/gi;
+replaces any occurrence of foo case-insensitively in the “current string” by the character sequence bar (e.g. Foo and FOO get replaced by bar too)
+
+if(m/foo/)...
+tests whether the current string contains the string foo
+
+Global CVS
+:ssh:clivem@global-cvs.svc:/data/repo
+#WE34@TH - password
+
+libray access to the following servers:
+potassium.dmz
+neptune.trusted
+beryllium.dmz
+ceres
+
+XML Namespaces - The xmlns Attribute
+The namespace declaration has the following syntax. xmlns:prefix="URI".
+XSLT is a language that can be used to transform XML documents into other formats
+The XML document below, is a document used to transform XML into HTML.
+
+The namespace "http://www.w3.org/1999/XSL/Transform" identifies XSLT elements inside an HTML document:
+
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+
+<xsl:template match="/">
+<html>
+<body>
+  <h2>My CD Collection</h2>
+  <table border="1">
+    <tr>
+      <th style="text-align:left">Title</th>
+      <th style="text-align:left">Artist</th>
+    </tr>
+    <xsl:for-each select="catalog/cd">
+    <tr>
+      <td><xsl:value-of select="title"/></td>
+      <td><xsl:value-of select="artist"/></td>
+    </tr>
+    </xsl:for-each>
+  </table>
+</body>
+</html>
+</xsl:template>
+
+</xsl:stylesheet>
+
+We can change the type of the element by setting the value of "xsi:type" attribute.
+XSD (XML Schema Definition) is a World Wide Web Consortium (W3C) recommendation that specifies how to formally describe the elements in an Extensible Markup Language (XML) document. This description can be used to verify that each item of content in a document adheres to the description of the element in which the content is to be placed. XSD 1.1 became an approved W3C standard in April 2012.
+XSD has several advantages over earlier XML schema languages, such as Document Type Definition (DTD) or Simple Object XML (SOX). XSD is written in XML, which means that it doesn't require intermediary processing by a parser. Other benefits include self-documentation, automatic schema creation and the ability to be queried through XML Transformations (XSLT).
+XSLT Tutorial
+XSL stands for EXtensible Stylesheet Language, and is a style sheet language for XML documents.
+XSLT stands for XSL Transformations.
+
+
+Web services are web application components
+WSDL
+WSDL stands for Web Services Description Language
+WSDL is an XML-based language for describing Web services.
+
+SOAP
+
+SOAP stands for Simple Object Access Protocol
+SOAP is an XML based protocol for accessing Web Services.
+SOAP is based on XML
+
+RDF
+RDF stands for Resource Description Framework
+RDF is a framework for describing resources on the web
+RDF is written in XML
+
+RSS
+RSS stands for Really Simple Syndication
+RSS allows you to syndicate your site content
+RSS defines an easy way to share and view headlines and content
+RSS files can be automatically updated
+RSS allows personalized views for different sites
+
+Web services use XML to code and to decode data, and SOAP to transport it (using open protocols).
+
+To summarize, a complete web service is, therefore, any service that:
+
+Is available over the Internet or private (intranet) networks
+Uses a standardized XML messaging system
+Is not tied to any one operating system or programming language
+Is self-describing via a common XML grammar
+Is discoverable via a simple find mechanism
+
+ the endpoint is the URL where your service can be accessed by a client application. The same web service can have multiple endpoints, for example in order to make it available using different protocols.
+ 
+ Platform
+ /usr/local/Striata/bin/startallservices.sh
+ These are the files to delete:
+ /var/Striata/run
+ *pid files
+ My logies to eb2 live
+ clive.mafika@striata.com
+ Maf1ka129%
+ 
+Webservices
+http://eb.integration.lan/cgi-bin/webservice/messagemanager.pl
+
+Its always
+Secure Transfer => Processing => Build engine
+
+Checking hte syntax error
+[team@preprod-securetransfer /var/Striata-local/data/projects/sanlam/spf]$ perl -c /var/Striata-local/conf/generic_polling_system/generic_polling_system.conf
+syntax error at /var/Striata-local/conf/generic_polling_system/generic_polling_system.conf line 1708, near "FailureReply"
+/var/Striata-local/conf/generic_polling_system/generic_polling_system.conf had compilation errors.
+
+Five specially named code blocks are executed at the beginning and at the end of a running Perl program. These are the BEGIN , UNITCHECK , CHECK , INIT , and END blocks.
+A BEGIN code block is executed as soon as possible, that is, the moment it is completely defined, even before the rest of the containing file (or string) is parsed. You may have multiple BEGIN blocks within a file (or eval'ed string); they will execute in order of definition. Because a BEGIN code block executes immediately, it can pull in definitions of subroutines and such from other files in time to be visible to the rest of the compile and run time. Once a BEGIN has run, it is immediately undefined and any code it used is returned to Perl's memory pool.
+An END code block is executed as late as possible, that is, after perl has finished running the program and just before the interpreter is being exited, even if it is exiting as a result of a die() function. (But not if it's morphing into another program via exec, or being blown out of the water by a signal--you have to trap that yourself (if you can).) You may have multiple END blocks within a file--they will execute in reverse order of definition; that is: last in, first out (LIFO). END blocks are not executed when you run perl with the -c switch, or if compilation fails.
+UNITCHECK , CHECK and INIT code blocks are useful to catch the transition between the compilation phase and the execution phase of the main program.
+CHECK code blocks are run just after the initial Perl compile phase ends and before the run time begins, in LIFO order. CHECK code blocks are used in the Perl compiler suite to save the compiled state of the program.
+Inside of a CHECK block, the value of ${^GLOBAL_PHASE} will be "CHECK" .
+INIT blocks are run just before the Perl runtime begins execution, in "first in, first out" (FIFO) order.
+Inside of an INIT block, the value of ${^GLOBAL_PHASE} will be "INIT" .
+#!/usr/bin/perl
+  # begincheck
+  print         "10. Ordinary code runs at runtime.\n";
+  END { print   "16.   So this is the end of the tale.\n" }
+  INIT { print  " 7. INIT blocks run FIFO just before runtime.\n" }
+  UNITCHECK {
+    print       " 4.   And therefore before any CHECK blocks.\n"
+  }
+  CHECK { print " 6.   So this is the sixth line.\n" }
+  print         "11.   It runs in order, of course.\n";
+  BEGIN { print " 1. BEGIN blocks run FIFO during compilation.\n" }
+  END { print   "15.   Read perlmod for the rest of the story.\n" }
+  CHECK { print " 5. CHECK blocks run LIFO after all compilation.\n" }
+  INIT { print  " 8.   Run this again, using Perl's -c switch.\n" }
+  print         "12.   This is anti-obfuscated code.\n";
+  END { print   "14. END blocks run LIFO at quitting time.\n" }
+  BEGIN { print " 2.   So this line comes out second.\n" }
+  UNITCHECK {
+   print " 3. UNITCHECK blocks run LIFO after each file is compiled.\n"
+  }
+  INIT { print  " 9.   You'll see the difference right away.\n" }
+  print         "13.   It only _looks_ like it should be confusing.\n";
+  __END__
+  
+  
+our TYPE VARLIST
+our VARLIST : ATTRS
+our TYPE VARLIST : ATTRS
+our makes a lexical alias to a package (i.e. global) variable of the same name in the current package for use within the current lexical scope.
+our has the same scoping rules as my or state, meaning that it is only valid within a lexical scope. Unlike my and state, which both declare new (lexical) variables, our only creates an alias to an existing variable: a package variable of the same name.
+This means that when use strict 'vars' is in effect, our lets you use a package variable without qualifying it with the package name, but only within the lexical scope of the our declaration. This applies immediately--even within the same statement.
+ package Foo;
+    use strict;
+    $Foo::foo = 23;
+    {
+        our $foo;   # alias to $Foo::foo
+        print $foo; # prints 23
+    }
+    print $Foo::foo; # prints 23
+    print $foo; # ERROR: requires explicit package name
+	
+	
+	:pserver:neilj@integration-cvs.svc:/cvsroot (cvs root)
+	url will look like this integration/projects/clients
+	
+for project 'my_glacier_project':
+
+-----------------------------------------------------------------------------------------------
+
+1. Copy hello world project
+2. Delete all CVS directoryies/hidden directories
+3. Change dir name
+4. Edit dev autobuilder conf
+	4.1 Name (*2), Description (*2), Type, DATAPATH 
+	4.2 ProjectDir
+	4.3 DataFile
+	4.3.1 Copy test data to testscrips dir and set DataFile value to match
+	4.4 MsgSubCategory
+	4.5 XmlSubstConfigFile (rename hello-world.conf)
+	4.6 LogFile
+	4.7 check all paths - change ../hello_world/.. to ../my_glacier_project/..
+
+5. Edit SamplesDir directory in samples.conf
+6. Edit the testds.pl scritp and change	
+	$ds->{projectDir} = '/sanlam/glacier_emc/hello_world';
+		to
+	$ds->{projectDir} = '/sanlam/glacier_emc/my_glacier_project';
+	
+7. Edit my_glacier_project.conf and update the following values/paths
+	7.1 EMC_CONTENT_HOME_TAB
+	7.2 PDFNOPASSWORD
+
+-----------------------------------------------------------------------------------------------
+
+Backbone.js gives structure to web applications by providing models with key-value binding and custom events, collections with a rich API of enumerable functions, views with declarative event handling, and connects it all to your existing API over a RESTful JSON interface.
+
+$ /usr/local/Striata/perl/bin/perl -c batchtexts.pl
+
+crontWTF is the site to go to, to get the running times of the cron files.
+
+Document name, eventtype(used in reports), and lettertype(used by the intermediary datasource) must always be set in the conf file.
+
+Array References
+That's one of the major uses of references in Perl: Passing complex data structures to subroutines.
+
+If you have an array called @names, you can get a reference to his array by preceding it with a back-slash: \@names. You can assign this reference to a scalar variable: my $names_ref = \@names;. (I only use the _ref to make it cleared in this article. Usually you would not use such names.)
+
+If you try to print the content of this new variable: print $names_ref; you will get an output like this: ARRAY(0x703dcf2). You don't have much to do with this string, but if you see such output from a code, you know, someone has forgotten to de-reference an array. (De-referencing is the word to use when you want to get back the real something from a reference of the real something.)
+
+About the only legitimate thing you can do with the reference is to de-reference it, to get back the original content of the array. For this you'd put a @ in-front of the reference: @$names_ref.
+
+For better readability you might want to add a pair of curly braces around the variable like this: @{$names_ref}, or even with spaces like this: @{ $names_ref }.
+
+Check out this examples:
+
+#!/usr/bin/perl
+use strict;
+use warnings;
+ 
+my @names = qw(Foo Bar Baz);
+ 
+my $names_ref  = \@names;
+print "$names_ref\n";         # ARRAY(0x703dcf2)
+ 
+print "@$names_ref\n";        # Foo Bar Baz
+print "@{ $names_ref }\n";    # Foo Bar Baz
+Passing two array references
+The solution then to the original problem is to pass two references of the two arrays:
+
+#!/usr/bin/perl
+use strict;
+use warnings;
+ 
+my @first  = (2, 3);
+my @second = (7, 8, 5);
+add(\@first, \@second);  # passing two references
+ 
+sub add {
+    my ($one_ref, $two_ref) = @_;
+    my @one = @{ $one_ref };       # dereferencing and copying each array
+    my @two = @{ $two_ref };
+ 
+    print "@one\n";    # 2 3
+    print "@two\n";    # 7 8 5
+ 
+    ...
+ 
+}
+In this example I copied the content of the two arrays to internal variables. This will make it easy for you to fill in the ... part using two regular arrays.
+
+In another article we'll see how to use the references directly, without copying their content.
+
+-------------------------------------------------------
+
+All the packages in perl should always return true, hence the one at the end 
+
+-------------------------------------------------------
+
+the LWP::Simple perl module is used to interact with teh web in perl.
+
+-------------------------------------------------------
+
+print "@a\n"; this tells perl put some spaces in the array when you print, the double quotes that is.
+Push adds toe th eend of the array, pop removes from the end of the array, 
+Shift removes from the beginning of the array, unshift adds something at the beginning of the array.
+
+@ARGV
+@_
+
+Open a file for appending in perl we use ">>" double >>.
+$_ used whenever we dont provide a variable for perl to use.
+
+map - works on every element in a foreach
+    - uses $_ as its variable
+map {.. do something } @array;
+
+------------------------------------------------------
+
+perl -l : chomp the input
+perl -a : autosplit on spaces in @F (fields)
+perl -n : process all lines
+perl -e : execute code
+
+-----------------------------------------------------
+FLAT PDF
+It is usually used to describe a PDF that has no form fields, comments, or other "interactive elements".
+
+-----------------------------------------------------
+
+Schema 
+a representation of a plan or theory in the form of an outline or model
+
+-----------------------------------------------------
+
+GD::Barcode::QRcode - Create QRcode barcode image with GD
+
+-----------------------------------------------------
+
+[SubstBuilder.pm] - A custom module to set subst data on the $msg SubstTemplate of a custom data source,
+using a data hash and an EmailcoUtils::Config config file.
+
+-----------------------------------------------------
+
+Thread safety is a computer programming concept applicable in the context of multi-threaded programs. A piece of code is thread-safe if it only manipulates shared data structures in a manner that guarantees safe execution by multiple threads at the same time.
+
+-----------------------------------------------------
+
+ref
+Returns a non-empty string if EXPR is a reference, the empty string otherwise. If EXPR is not specified, $_ will be used. The value returned depends on the type of thing the reference is a reference to.
+Builtin types include:
+    SCALAR
+    ARRAY
+    HASH
+    CODE
+    REF
+    GLOB
+    LVALUE
+    FORMAT
+    IO
+    VSTRING
+    Regexp
+
+-----------------------------------------------------
+
+Each <Value> tag in the config must have a ValueType value. Possible ValueType values are:
+
+STRING
+XPATH
+XREPEAT
+FILE
+LANGUAGE_FILE
+GUID
+JSON
+BFOPDF
+METHOD
+QRCODE
+
+-----------------------------------------------------
+
+|grep CAMTXJCH09275 how to use the grep command
+
+-----------------------------------------------------
+
+check platform version  cat /usr/local/Striata/VERSION
+
+-----------------------------------------------------
+
+tail -f generic_poll_system.log
+
+-----------------------------------------------------
+
+cvs up -C -d (directory) - creates or gets a missing directory
+
+-----------------------------------------------------
+
+Maintenance letters:
+
+First make sure to delete succeeded batches from the platform for the letters that succeeded and the intermediary build.
+
+The automation process is such that once the files are fetched with cron(platinum.dmz) job sftp_sanlam_glacier.pl from 
+
+glc_striata@st.sanlam.co.za:/users/glacier/glc_striata/OutgoingProd/Maintenance
+
+...they are dropped in 
+
+/var/Striata-local/data/projects/sanlam/sanlam_glacier/incominglive/maintenance/pollingpickup
+and backed up to 
+/var/Striata-local/data/projects/sanlam/sanlam_glacier/incominglive/maintenance/backup
+
+This means that you can now copy the files with the desired date from the backup directory straight to the pollingpickup durectory. Polling system will take care of the rest.
+
+The XML files are the data and the CSV file is the trigger.
+
+
+Statements:
+
+Again delete any necessary batches. If you are re-dropping only one segment, an additional intermediary job will be created, which will fail(which is normal as there wont be any messages for it process after the first intermediary build runs).
+
+Build files are backed up - but you wont need all of them to rerun(some get generated by the ftp fetch). Your original data will be in the back up dir:
+
+/var/Striata-local/data/projects/sanlam/sanlam_glacier/incominglive/statements/backup
+
+If your original data looked like this:
+
+Glacier_Build_2015_01_06_064959.csv
+Statements001_2015_01_06_064959.XML
+Statements002_2015_01_06_064959.XML
+Statements003_2015_01_06_064959.XML
+StatementsLast_2015_01_06_064959.XML
+StatementsTaxCerts_2015_01_06_064416.XML
+StatementsTER_2015_01_06_064959.XML
+
+If you need to rerun the statements from scratch, you will need to copy all these files back to the client FTP.
+
+If you only need to rerun one segment(is only number 2 failed) then you need these:
+
+Glacier_Build_2015_01_06_064959.csv
+Statements002_2015_01_06_064959.XML
+StatementsLast_2015_01_06_064959.XML
+StatementsTaxCerts_2015_01_06_064416.XML
+StatementsTER_2015_01_06_064959.XML
+
+
+FTP the files back to glc_striata@st.sanlam.co.za:/users/glacier/glc_striata/OutgoingProd/Statements
+
+The fetch process will fetch the files and re-index, creating a .zip and a .eof in the pollingpickup dir.
+
+You may need to clear the DS workdir on build(ceres) once the segments have all built. The intermediary build won't run unless this dir is clear of all temp dirs. So delete anything in
+
+/var/Striata-local/data/projects/sanlam/sanlam_glacier/dsworkingdir/statements
+
+once all the client builds are done.
+
+
+Call me if you need me.
+
+-----------------------------------------------------
+
+Hi Guys,
+
+The documentation that I was able to put together is under drive:
+
+Region - South Africa -> From Galiano -> Sanlam Group -> Sanlam PF Glacier
+
+Unfortunately I wasn't able to complete the design doc in time. There is a technical handover word doc, which will be handy for troubleshooting failed builds.
+
+The Letters datasrouce POD is very detailed.
+
+The SubstBuilder POD is complete and detailed, with snippets and examples.
+
+Both these modiles have their latest versions in CVS.
+
+All Glacier projects are building and functional on the preprod environment.
+
+-----------------------------------------------------
+[8:28:38 AM] Neil van Rensburg: also note, that t he right place for dropping statement data is:
+[8:29:20 AM] Neil van Rensburg: /var/Striata-local/data/projects/sanlam/sanlam_glacier/incoming/statements/pollingpickup
+
+For letters, use:
+
+/var/Striata-local/data/projects/sanlam/sanlam_glacier/incoming/maintenance/pollingpickup
+
+-----------------------------------------------------
+
+dropping statement data on preprod
+/simulated_sanlam_ftp/Outgoing/Statements is the directory
+2.2. Directories on the remote ftp (glc_striata@st.sanlam.co.za)
+
+The below directories is where the ftp fetch job will pull data files from.
+
+/users/glacier/glc_striata/OutgoingProd/Statements
+/users/glacier/glc_striata/OutgoingProd/Maintenance
+/users/glacier/glc_striata/OutgoingTest/Statements
+/users/glacier/glc_striata/OutgoingTest/Maintenance
+we simulate this process on preprod
+
+on live its like below:
+2.3. Local delivery directories (platinum.dmz {st2.za.striata.com})
+
+The below directories is where the fetch script will save the files locally.
+
+/var/Striata-local/data/projects/sanlam/sanlam_glacier/incomingtest/maintenance/pollingpickup
+/var/Striata-local/data/projects/sanlam/sanlam_glacier/incomingtest/statements
+/var/Striata-local/data/projects/sanlam/sanlam_glacier/incominglivet/maintenance/pollingpickup
+/var/Striata-local/data/projects/sanlam/sanlam_glacier/incominglive/statements
+
+NB: Statements SFTP has additional processes that build zip data files. These files are built in the pollingpickup directory, together with .eof files to ensure generic polling pickup.
+
+2.5. Statements pre-processing (platinum.dmz {st2.za.striata.com})
+
+For letters, the data files are moved via SFTP directly to the ‘pollingpickup’ locations. For statements, an additional step zips each ‘segment’ into its own data file, to be handled by the platform as a completely separate task. Segments are defined by numbered statements xml file, eg. Statements001_2015_02_07_081423.XML.
+
+
+These files will be moved from the remote SFTP server to 
+/var/Striata-local/data/projects/sanlam/sanlam_glacier/incomingtest/statements:
+The pre-processing (which is part of the ftp script), will cause these files to be grouped and zipped. The resulting file set in
+/var/Striata-local/data/projects/sanlam/sanlam_glacier/incomingtest/statements/pollingpickup,
+will look like:
+
+-----------------------------------------------------
+
+password for login to preprod is Cl!v3m
+
+-----------------------------------------------------
+
+  */5  *    *    *    *  cd /full/path/to/root && bin/cake myshell myparam
+# *    *    *    *    *  command to execute
+# │    │    │    │    │
+# │    │    │    │    │
+# │    │    │    │    \───── day of week (0 - 6) (0 to 6 are Sunday to Saturday,
+# |    |    |    |           or use names)
+# │    │    │    \────────── month (1 - 12)
+# │    │    \─────────────── day of month (1 - 31)
+# │    \──────────────────── hour (0 - 23)
+# \───────────────────────── min (0 - 59)
+
+-----------------------------------------------------
+
+Standard bank card 5196120218555968
+
+-----------------------------------------------------
+
+The new polling system is in here:
+/var/Striata-local/conf/projects/striata/pollingsystem]
+
+-----------------------------------------------------
+SPF bulk email
+  SELECT * FROM `spf_bulkemail_received` WHERE filename LIKE 'PROD_CAMTXJCO24979_001_20160722-14215123%'
+  run this sql on the db and see if you get a result
+ *** Call to Leandra Ferreira ***
+  SELECT * FROM `spf_bulkemail_reports` WHERE filename LIKE 'PROD_CAMTXJCO24979_001_20160722-14215123%'
+  SELECT * FROM `spf_bulkemail_errors` WHERE `original_filename` LIKE 'PROD_CAMTXJCO24979_001_20160722-14215123%'
+  SELECT * FROM `spf_bulkemail` WHERE `original_filename` LIKE 'PROD_CAMTXJCO24979_001_20160722-14215123%'
+
+-----------------------------------------------------
+
+gmail password - Maf1ka12q%
+
+-----------------------------------------------------
+
+CVS password - Str14t4S3rv1c3!
+
+http://www.toon.is/phineas-and-ferb-4x20-return-policy-imperfect-storm-video_5b76a689b.html
+
+get all the email addresses command:
+ grep -in '<EmailAddress>.*</EmailAddress>' ./SanlamGlacierEmcRepurchaseLettersLive_1476996425_4892_Sourcefile_RepurchaseConfirmation_2016_10_19_160206.XML
+
+ These emails will need to be put back for glacier logs incase there is a problem.
+ Glacier-notifications@striata.com;striataecomms@glacier.co.za;
+ 
+  12 * * * /usr/local/Striata/perl/bin/perl /var/Striata-local/projects/sanlam/pac/scripts/create-pac-delivery-report.pl /var/Striata-local/projects/sanlam/pac/automation/eb2-prod-main-config.conf 1478304000 1478131200
+  
+  when there is a probem with merge staments data
+  ##### -- Sanlam Glacier -- #####
+00 1 * * * /usr/local/Striata/bin/perl /var/Striata-local/projects/sanlam/glacier_emc/automation/scripts/print_pdfs_to_printers.pl /var/Striata-local/projects/sanlam/glacier_emc/automation/conf/pdf_retrieve/eb2live_print.conf
+
+55 3 * * * /usr/local/Striata/bin/perl /var/Striata-local/projects/sanlam/glacier_emc/automation/scripts/mergepdfs.pl /var/Striata-local/projects/sanlam/glacier_emc/automation/conf/pdf_merge/mergepdfs_live.conf
+
+
+15 8 * * * /usr/local/Striata/bin/perl /var/Striata-local/projects/sanlam/glacier_emc/automation/scripts/sftp_sanlam_glacier.pl /var/Striata-local/projects/sanlam/glacier_emc/automation/conf/sftp_push/sftp_push_to_st2.conf pushtost2.lock
+
+When generating Sanlam PAC return files:
+/usr/local/Striata/perl/bin/perl /var/Striata-local/projects/sanlam/pac/scripts/create-pac-delivery-report.pl /var/Striata-local/projects/sanlam/pac/automation/eb2-prod-main-config.conf 1482883200 1483056000
+
+
+
+
+ /var/Striata-local/logs/projects/striata/transfermanager/transfermanager.log
+
+ /var/Striata-local/data/projects/sanlam/sanlam_glacier/incomingtest/maintenance/pollingpickup
+ 
+ this is for saving and changing contact details on teh emc
+ http://integration-cvs.lan/*checkout*/integration/websites/apache-em1/clients.za.striata.com/cgi-bin/sanlam/updatedetailsemc.pl
+ 
+ QR Codes and Perl
+Filed under: Uncategorized — Charles Engelke @ 1:28 pm 
+Two-dimensional barcodes like QRCode are pretty neat, and after I got my Google Ion phone with its built-in barcode program I went around scanning every one I could find for a while.  But I never really did anything with them until yesterday, when it occurred to me that they might be useful for a project I’m doing.  The project would augment an existing system written in Perl, so I went to see what Perl has in this vein.
+
+It has GD::Barcode::QRCode (which I got for Windows using ActiveState‘s PPM tool and installing Catalyst-View-GD-Barcode-QRcode).  It’s dead easy to use.  Given a string (say, $text), you can just do:
+
+use GD::Barcode::QRcode;
+binmode STDOUT;
+print GD::Barcode::QRcode->new($text)->plot->png;
+Well, it’s that easy if the text is very short. If it’s not, you’ll get a message to STDERR saying something like:
+
+Overflow error. version 1
+total bits: 468  max bits: 128
+You, see, there are different size QRCodes, and the module doesn’t seem to pick the right one for you (even though the documentation seems to say it will). But there are three parameters you can pass to the new method that give you some control over this: Ecc, Version, and ModuleSize. But what do they mean? The documentation isn’t very clear, but I’ve figured a bit of it out. The purpose of this post is for me to document what I’ve learned so I’ll be able to use it again.
+
+The most important parameter (to me, anyway) is Version. Which is a terrible name, because it implies to me sequential enhancements. Actually, it just determines the size of the square barcode. A version 1 barcode is 21 rows by 21 columns, and each successively larger size is four rows taller and four columns wider than the last. So a version 2 barcode is 25 by 25, version 3 is 29 by 29, and so on. (I don’t know why they go up by four. It might just be convention, or it might be something to do with the algorithms involved.) A version n barcode is therefore 4n+17 rows by the same number of columns. The largest legal value of version is apparently 40.
+
+Ecc stands for Error-Correcting Code, and the possible values are ‘M’, ‘L’, ‘H’, or ‘Q’, with ‘M’ being the default. That’s all the module’s documentation says. Huh? How am I supposed to pick? Well, different values result in different levels of error-correcting codes being used. The more robust the error-correction, the less data you fit into a fixed size barcode. And the values used here? Since ‘L’ reduces available data less than ‘M’, which does so less than ‘H’, my guess is that they mean “low”, “medium”, and “high”. ‘Q’ is between ‘M’ and ‘H’; maybe it means “quality”? If you don’t have to worry about the barcode being badly smudged or losing definition in transmission, ‘L’ for low error correction is fine. If you’re going to have it get dirty, scraped up, and badly scanned, go for ‘H’. Or pick something in the middle.
+
+Finally, ModuleSize is just how big the printed blocks are going to be. If you pick 1 for this value, they’ll use a single pixel each in the resulting image file. I found that 8 was a good choice for a PNG on a web page.
+
+The final piece of the puzzle is just how much data you can put into a barcode with specific values of these parameters. This table tells you. So, if I have 256 bytes of binary data, and I have a fairly clean but not pristine printing, scanning, and transmission environment (so I’ll want to at least use M for medium error correction), I’ll need to set the version to at least 12. Here’s the code:
+
+use GD::Barcode::QRcode;
+binmode STDOUT;
+my $code = GD::Barcode::QRcode->new($binary_data_256_bytes_long,
+   {ECC => 'M', Version => 12, ModuleSize => 8}
+);
+print $code->plot->png;
+
+
+When droppping statemtns data make sure the following files are present:
+
+$VAR1 = [
+          'GlobalPortfolioIds.xml',
+          'StatementsIntermediaries_2016_07_07_023179.xml',
+          'StatementsLast_2016_07_07_023179.xml',
+          'Statements001_2016_07_07_023179.portfolioIds.xml',
+          'Statements001_2016_07_07_023179.xml',
+          'StatementsTaxCerts_2016_07_07_023179.xml',
+          'StatementsTER_2016_07_07_023179.xml'
+        ];
+
+
+Unsubscribe list/usr/local/Striata/bin/perl /var/Striata-local/projects/sanlam/glacier_emc/upload_unsubscribe_entries/upload_unsubscribe_entries.pl TFSA_probleem.csv
+
+webservices
+https://global-cvs.svc/viewvc.cgi/za/configs/striata_platforms/eb2.za.striata.com/striata/conf/web/webservice/messagemanager.conf?view=markup
+Sanlam uses this to retrive documents from us
+https://eb2.za.striata.com/cgi-bin/uas/system.pl?nocache=6E8DE9E8-0496-1594-9763-F35E095C18A5 to look for the user that is used to login
+
+update and add new project directory
+
+cvs -d :pserver:striataservice@integration-cvs.svc:/cvsroot co -l -d automation integration/projects/clients/nedbank/onboarding/automation/
+
+Intermediaries
+
+To re run intermediaries its not just a matter of picking a previous trigger file and use that to build, but rather i must open it and put in that days file names.
+
+Rerun Sanlam SPF
+
+First delete data from spf_bulkemail_received and from spf_bulkemail_errors as an example see below:
+delete from spf_bulkemail_errors where original_filename = 'PROD_CAMTXJCO06975_001_20170615-14042526.dat' and 
+delete from spf_bulkemail_received where filename = 'PROD_CAMTXJCO06975_001_20170615-14042526.dat'
+Then next clreate and eof file with the same name as the zip file and rop it into:
+/home/clients/sftp/sanlam_pf/incoming/Production/IncomingData
+
+
+web services
+https://wiki.striata.com/index.php/Striata_Platform_FAQ%27s#Web-service_Accommodate_Multiple_Users
+http://<domain>/webservice/striata-msgmanager.wsdl
+
+This command as an example will force indexes on batches specify:
+
+C:/Striata/demonmail/demonmail -cmd reindex 276784315 276809580 276714854 --force
+
+carbon
+ tail /var/Striata-local/logs/clients.za.striata.com-error.log
+ 
+ 
+  /usr/local/Striata/bin/perl -wc -I /usr/local/Striata/perlserver/servants/demonbuild/ SPFBulkEmailSolutionResendNewMsgDS.pm
+  
+vfs tracking  HARE/110817/0016/01
+
+setting up crons - https://cronwtf.github.io/
+
+ITDevPVI.Notifications@sanlam.co.za;ITISS.OnlineSupport@sanlam.co.za;SPF-notifications@striata.com;
+
+http://emailstuff.org/glyph/search/00ef
+https://www.toptal.com/designers/htmlarrows/letters/
+http://designerstoolbox.com/designresources/html/
+
+mAF1KA126%hANNAH

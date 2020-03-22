@@ -1,0 +1,20 @@
+[20-Apr-2019 00:03:47 Africa/Johannesburg] PHP Fatal error:  Uncaught Error: Class 'App' not found in /home/trustcon/public_html/app/webroot/uploads/IdpPolicyMonitoringDocumentsController.php:2
+Stack trace:
+#0 {main}
+  thrown in /home/trustcon/public_html/app/webroot/uploads/IdpPolicyMonitoringDocumentsController.php on line 2
+[23-Apr-2019 04:04:55 Africa/Johannesburg] PHP Fatal error:  Uncaught Error: Class 'App' not found in /home/trustcon/public_html/app/webroot/uploads/IdpPolicyMonitoringDocumentsController.php:2
+Stack trace:
+#0 {main}
+  thrown in /home/trustcon/public_html/app/webroot/uploads/IdpPolicyMonitoringDocumentsController.php on line 2
+[25-Apr-2019 00:08:23 Africa/Johannesburg] PHP Fatal error:  Uncaught Error: Class 'App' not found in /home/trustcon/public_html/app/webroot/uploads/IdpPolicyMonitoringDocumentsController.php:2
+Stack trace:
+#0 {main}
+  thrown in /home/trustcon/public_html/app/webroot/uploads/IdpPolicyMonitoringDocumentsController.php on line 2
+[09-May-2019 04:34:16 Africa/Johannesburg] PHP Fatal error:  Uncaught Error: Class 'App' not found in /home/trustcon/public_html/app/webroot/uploads/IdpPolicyMonitoringDocumentsController.php:2
+Stack trace:
+#0 {main}
+  thrown in /home/trustcon/public_html/app/webroot/uploads/IdpPolicyMonitoringDocumentsController.php on line 2
+[12-May-2019 07:31:50 Africa/Johannesburg] PHP Fatal error:  Uncaught Error: Class 'App' not found in /home/trustcon/public_html/app/webroot/uploads/IdpPolicyMonitoringDocumentsController.php:2
+Stack trace:
+#0 {main}
+  thrown in /home/trustcon/public_html/app/webroot/uploads/IdpPolicyMonitoringDocumentsController.php on line 2

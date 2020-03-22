@@ -1,0 +1,1 @@
+<h1>All emails sent</h1>
