@@ -1,13 +1,13 @@
-CounsilorDocumentsController.php<?php
+GeneralDocumentsController.php<?php
 App::uses('AppController', 'Controller');
 App::uses('CakeEmail', 'Network/Email');
 /**
- * CounsilorDocuments Controller
+ * GeneralDocuments Controller
  *
- * @property CounsilorDocument $CounsilorDocument
+ * @property GeneralDocuments $GeneralDocuments
  * @property PaginatorComponent $Paginator
  */
-class CounsilorDocumentsController extends AppController {
+class GeneralDocumentsController extends AppController {
 
 	/**
 	 * Components
@@ -24,7 +24,7 @@ class CounsilorDocumentsController extends AppController {
 
 		foreach ($users as $user)
 		{
-				if( in_array(2, unserialize($user['User']['permissions'])) )
+				if( in_array(171, unserialize($user['User']['permissions'])) )
 				{
 						$allmembers[] = $user;
 				}
@@ -39,8 +39,8 @@ class CounsilorDocumentsController extends AppController {
 
 		public function messageresend() {
 				if ($this->request->is('post')) {
-					$message = $this->request->data['CounsilorDocument']['message'];
-					$subject = $this->request->data['CounsilorDocument']['subject'];
+					$message = $this->request->data['GeneralDocuments']['message'];
+					$subject = $this->request->data['GeneralDocuments']['subject'];
 
 					if(!$subject)
 					{
@@ -50,17 +50,17 @@ class CounsilorDocumentsController extends AppController {
 					{
 						$message = "Council Meeting documents are posted. Please login to https://trustconetest.co.za/users/login to view documents.";
 					}
-					if($this->request->data['CounsilorDocument']['sendemail']){
+					if($this->request->data['GeneralDocuments']['sendemail']){
 						 //$this->sendemailAttachment($message, $subject, $this->request->data);
-	 						$this->sendemail($message, $subject, 22 );
+	 						$this->sendemail($message, $subject, 171 );
 					}
-					if($this->request->data['CounsilorDocument']['sendsms']){
-						 $this->sendsms($message, 22);
+					if($this->request->data['GeneralDocuments']['sendsms']){
+						 $this->sendsms($message, 171);
 				  }
 
 					$this->Session->setFlash(__('Your messages have been sent.'), 'default', array('class' => 'alert alert-success'));
 
-					return $this->redirect(array('Controller' => 'CounsilorDocument', 'action' => 'committeedetails'));
+					return $this->redirect(array('Controller' => 'GeneralDocuments', 'action' => 'committeedetails'));
 			}
 		}
 		/********************************/
@@ -82,12 +82,12 @@ function sendemailAttachment($message=null, $subject=null, $data)
 		}
 		//Build an array of attachments
 		$attachments = [];
-		foreach ($data['CounsilorDocument']['files'] as $value) {
+		foreach ($data['GeneralDocuments']['files'] as $value) {
 			$attachments[$value['name']] = $value['tmp_name'];
 		}
 
 		foreach ($users as $user) {
-				if (in_array(2, unserialize($user['User']['permissions']))) {
+				if (in_array(171, unserialize($user['User']['permissions']))) {
 						$Email->from(array('no-reply@matjhabeng.co.za' => 'Matjhabeng Local Municipality Document Management System'))
 								->template('newmeetingposted', 'default')
 								->domain('www.trustconetest.co.za')
@@ -111,7 +111,7 @@ function sendemailAttachment($message=null, $subject=null, $data)
 	public function index() {
 	    $this->loadModel('Meeting');
 
-	    $allmeetings = $this->Meeting->find('all', ['fields'=>'DISTINCT name, idcounter, created, user_id, minutes, minutes_created, minutes_og_meeting', 'conditions'=>['Meeting.type' => 0], 'order' => ['id' => 'DESC']]);
+	    $allmeetings = $this->Meeting->find('all', ['fields'=>'DISTINCT name, idcounter, created, user_id, minutes, minutes_created, minutes_og_meeting', 'conditions'=>['Meeting.type' => 27], 'order' => ['id' => 'DESC']]);
         $this->set('meetings', $allmeetings);
 
         $this->set('usertype', $this->Auth->user()['user_type_id']);
@@ -190,7 +190,7 @@ function sendemailAttachment($message=null, $subject=null, $data)
             $directory = "addendum";
         }
 
-        $options = array('conditions' => array($tafura.'.' . $this->$tafura->primaryKey => $id, $tafura.'.type' => 0));
+        $options = array('conditions' => array($tafura.'.' . $this->$tafura->primaryKey => $id, $tafura.'.type' => 27));
         $file = $this->$tafura->find('first', $options);
         if($which == 6) {
             $path = '/webroot/uploads/' . $directory . '/' . $file[$tafura]['minutes'];
@@ -237,7 +237,7 @@ function sendemailAttachment($message=null, $subject=null, $data)
         if (!$this->Meeting->exists($id)) {
             throw new NotFoundException(__('Invalid meeting'));
         }
-        $options = array('conditions' => array('Meeting.' . $this->Meeting->primaryKey => $id, 'Meeting.type' => 0));
+        $options = array('conditions' => array('Meeting.' . $this->Meeting->primaryKey => $id, 'Meeting.type' => 27));
         // $options = array('conditions' => array('MeetingAgenda.type' => 1));
 
         $theMeeting = $this->Meeting->find('all', $options);
@@ -246,7 +246,7 @@ function sendemailAttachment($message=null, $subject=null, $data)
          * This is for the agenda
          */
         $this->loadModel('MeetingAgenda');
-        $options1 = array('conditions' => array('MeetingAgenda.meeting_id' => $id, 'MeetingAgenda.type' => 0));
+        $options1 = array('conditions' => array('MeetingAgenda.meeting_id' => $id, 'MeetingAgenda.type' => 27));
 
         $agenda = $this->MeetingAgenda->find('all', $options1);
 
@@ -256,7 +256,7 @@ function sendemailAttachment($message=null, $subject=null, $data)
          * This is for the minutes
          */
         $this->loadModel('MeetingMinutes');
-        $options2 = array('conditions' => array('MeetingMinutes.meeting_id' => $id, 'MeetingMinutes.type' => 0));
+        $options2 = array('conditions' => array('MeetingMinutes.meeting_id' => $id, 'MeetingMinutes.type' => 27));
 
         $MeetingMinutes = $this->MeetingMinutes->find('all', $options2);
 
@@ -264,7 +264,7 @@ function sendemailAttachment($message=null, $subject=null, $data)
          * This is for the items
          */
         $this->loadModel('MeetingItems');
-        $options3 = array('conditions' => array('MeetingItems.meeting_id' => $id, 'MeetingItems.type' => 0));
+        $options3 = array('conditions' => array('MeetingItems.meeting_id' => $id, 'MeetingItems.type' => 27));
 
         $Meetingitems = $this->MeetingItems->find('all', $options3);
 
@@ -272,39 +272,39 @@ function sendemailAttachment($message=null, $subject=null, $data)
          * This is for the attachments
          */
         $this->loadModel('MeetingAttachments');
-        $options4 = array('conditions' => array('MeetingAttachments.meeting_id' => $id, 'MeetingAttachments.type' => 0));
+        $options4 = array('conditions' => array('MeetingAttachments.meeting_id' => $id, 'MeetingAttachments.type' => 27));
 
         $MeetingAttachments = $this->MeetingAttachments->find('all', $options4);
 
-				/*
+		/*
          * This is for the separate covers
          */
         $this->loadModel('MeetingSeparatecovers');
-        $options5 = array('conditions' => array('MeetingSeparatecovers.meeting_id' => $id, 'MeetingSeparatecovers.type' => 0));
+        $options5 = array('conditions' => array('MeetingSeparatecovers.meeting_id' => $id, 'MeetingSeparatecovers.type' => 27));
 
         $MeetingSeparateCovers = $this->MeetingSeparatecovers->find('all', $options5);
 
-				/*
-				 * This is for the the notice
-				 */
-				$this->loadModel('MeetingNotice');
-				$options6 = array('conditions' => array('MeetingNotice.meeting_id' => $id, 'MeetingNotice.type' => 0));
+		/*
+		 * This is for the the notice
+		 */
+		$this->loadModel('MeetingNotice');
+		$options6 = array('conditions' => array('MeetingNotice.meeting_id' => $id, 'MeetingNotice.type' => 27));
 
-				$Notices = $this->MeetingNotice->find('all', $options6);
+		$Notices = $this->MeetingNotice->find('all', $options6);
 
-				/*
-				 * This is for the the addendum
-				 */
-				$this->loadModel('MeetingAddendum');
-				$options7 = array('conditions' => array('MeetingAddendum.meeting_id' => $id, 'MeetingAddendum.type' => 0));
+		/*
+		 * This is for the the addendum
+		 */
+		$this->loadModel('MeetingAddendum');
+		$options7 = array('conditions' => array('MeetingAddendum.meeting_id' => $id, 'MeetingAddendum.type' => 27));
 
-				$Addendums = $this->MeetingAddendum->find('all', $options7);
+		$Addendums = $this->MeetingAddendum->find('all', $options7);
 
         $this->set('usertype', $this->Auth->user()['user_type_id']);
 
-				$this->set('Addendums', $Addendums);
-				$this->set('Notice', $Notices);
-				$this->set('MeetingSeparatecovers', $MeetingSeparateCovers);
+		$this->set('Addendums', $Addendums);
+		$this->set('Notice', $Notices);
+		$this->set('MeetingSeparatecovers', $MeetingSeparateCovers);
         $this->set('MeetingAttachments', $MeetingAttachments);
         $this->set('Meeting', $theMeeting[0]);
         $this->set('previousminutes', $MeetingMinutes);
@@ -328,11 +328,11 @@ function sendemailAttachment($message=null, $subject=null, $data)
 public function addnotice() {
 	if ($this->request->is('post')) {
 		ini_set('upload_max_filesize', '20M');
-		$this->CounsilorDocument->create();
+		$this->GeneralDocuments->create();
 
-		$this->request->data['CounsilorDocument']['user_id'] = $this->Auth->user('id');
+		$this->request->data['GeneralDocuments']['user_id'] = $this->Auth->user('id');
 
-		if ($this->CounsilorDocument->save($this->request->data)) {
+		if ($this->GeneralDocuments->save($this->request->data)) {
 			$this->Flash->success(__('The notice has been saved successfully.'));
 			return $this->redirect(array('action' => 'noticeindex'));
 		} else {
@@ -355,11 +355,11 @@ public function addnotice() {
             $meeting = [];
 
             $meeting['Meeting']['user_id'] = $this->Auth->user('id');
-            $meeting['Meeting']['name']    = $meetingName = $this->request->data['CounsilorDocument']['meeting'];
+            $meeting['Meeting']['name']    = $meetingName = $this->request->data['GeneralDocuments']['meeting'];
 
             //Before saving the meeting, get the previous id counter and increment it then save.
             //Retrieve it and most important is the type when retrieving then afterwards simply add 1
-            $previousMeeting = $this->Meeting->find('first', array('conditions' => array('Meeting.type' => 0),
+            $previousMeeting = $this->Meeting->find('first', array('conditions' => array('Meeting.type' => 27),
                                                     'order' => array('Meeting.id' => 'DESC') ));
            // print_r($previousMeeting);die;
 
@@ -370,7 +370,7 @@ public function addnotice() {
 
 						//First save the meeting addendum
             $this->loadModel('MeetingAddendum');
-            $addendumDocuments = $this->request->data['CounsilorDocument']['addendum'];
+            $addendumDocuments = $this->request->data['GeneralDocuments']['addendum'];
             $addendumDetails = [];
 
             foreach( $addendumDocuments as $upload)
@@ -403,7 +403,7 @@ public function addnotice() {
 
 						//First save the meeting notices
             $this->loadModel('MeetingNotice');
-            $noticeDocuments = $this->request->data['CounsilorDocument']['notice'];
+            $noticeDocuments = $this->request->data['GeneralDocuments']['notice'];
             $noticeDetails = [];
 
             foreach( $noticeDocuments as $upload)
@@ -436,7 +436,7 @@ public function addnotice() {
 
 						//Second save the meeting agenda
             $this->loadModel('MeetingAgenda');
-            $agendaDocuments = $this->request->data['CounsilorDocument']['agenda'];
+            $agendaDocuments = $this->request->data['GeneralDocuments']['agenda'];
             $agendaDetails = [];
 
             foreach( $agendaDocuments as $upload)
@@ -470,7 +470,7 @@ public function addnotice() {
 
             //First save the meeting previous minutes
             $this->loadModel('MeetingMinute');
-            $minutesDocuments = $this->request->data['CounsilorDocument']['minutes'];
+            $minutesDocuments = $this->request->data['GeneralDocuments']['minutes'];
             $minutesDetails = [];
 
             foreach( $minutesDocuments as $upload)
@@ -504,7 +504,7 @@ public function addnotice() {
 
             //First save the meeting items
             $this->loadModel('MeetingItem');
-            $itemsDocuments = $this->request->data['CounsilorDocument']['items'];
+            $itemsDocuments = $this->request->data['GeneralDocuments']['items'];
             $itemsDetails = [];
 
             foreach( $itemsDocuments as $upload)
@@ -538,7 +538,7 @@ public function addnotice() {
 
             //First save the meeting attachments
             $this->loadModel('MeetingAttachment');
-            $attachmentDocuments = $this->request->data['CounsilorDocument']['attachments'];
+            $attachmentDocuments = $this->request->data['GeneralDocuments']['attachments'];
             $attachmentDetails = [];
 
             foreach( $attachmentDocuments as $upload)
@@ -573,7 +573,7 @@ public function addnotice() {
 
             //First save the meeting separate covers
             $this->loadModel('MeetingSeparatecover');
-            $separateCoversDocuments = $this->request->data['CounsilorDocument']['separatecovers'];
+            $separateCoversDocuments = $this->request->data['GeneralDocuments']['separatecovers'];
             $separeCoverDetails = [];
 
             foreach( $separateCoversDocuments as $upload)
@@ -607,7 +607,7 @@ public function addnotice() {
 
             //First save the meeting addendum
             $this->loadModel('MeetingAddendum');
-            $addendumDocuments = $this->request->data['CounsilorDocument']['addendum'];
+            $addendumDocuments = $this->request->data['GeneralDocuments']['addendum'];
             $addendumDetails = [];
 
             foreach( $addendumDocuments as $upload)
@@ -639,14 +639,14 @@ public function addnotice() {
                 }
             }
 
-						$notifications = $this->request->data['CounsilorDocument']['notifications'];
-						unset($this->request->data['CounsilorDocument']['notifications']);
+						$notifications = $this->request->data['GeneralDocuments']['notifications'];
+						unset($this->request->data['GeneralDocuments']['notifications']);
 
-						$sendemail = $this->request->data['CounsilorDocument']['sendemail'];
-						unset($this->request->data['CounsilorDocument']['sendemail']);
+						$sendemail = $this->request->data['GeneralDocuments']['sendemail'];
+						unset($this->request->data['GeneralDocuments']['sendemail']);
 
-						$sendsms = $this->request->data['CounsilorDocument']['sendsms'];
-						unset($this->request->data['CounsilorDocument']['sendsms']);
+						$sendsms = $this->request->data['GeneralDocuments']['sendsms'];
+						unset($this->request->data['GeneralDocuments']['sendsms']);
 
             $this->loadModel('AuditTrail');
             $auditTrail['AuditTrail']['user_id'] = $this->Auth->user('id');
@@ -661,10 +661,10 @@ public function addnotice() {
             //This is for sending emails to others not part of counciler user type
 						if($notifications) {
 							if($sendsms) {
-								$this->sendsms($this->request->data['CounsilorDocument']['message']);
+								$this->sendsms($this->request->data['GeneralDocuments']['message']);
 							}
 							if($sendemail) {
-		            $this->sendemail($this->request->data['CounsilorDocument']['message'], $this->request->data['CounsilorDocument']['subject']);
+		            $this->sendemail($this->request->data['GeneralDocuments']['message'], $this->request->data['GeneralDocuments']['subject']);
 							}
 						}else {
               $this->sendsms();
@@ -685,7 +685,7 @@ public function addnotice() {
             die('There was a problem trying to save the audit trail for editing counsiler document');
         }
 
-		$users = $this->CounsilorDocument->User->find('list');
+		$users = $this->GeneralDocuments->User->find('list');
 		$this->set(compact('users'));
 	}
 
@@ -702,7 +702,7 @@ public function addnotice() {
 
 			foreach ($users as $user)
 			{
-					if( in_array(2, unserialize($user['User']['permissions'])) )
+					if( in_array(171, unserialize($user['User']['permissions'])) )
 					{
 							$thedetails['cellnumber'] = $user['User']['cellnumber'];
 
@@ -719,7 +719,6 @@ public function addnotice() {
 			}
 
 			$numbers .= '27817549884';
-			//$numbers = '27635866058';
 
 			if(!$message)
 			{
@@ -727,7 +726,6 @@ public function addnotice() {
 			}
 			$smsText = urlencode($message);
 
-			//$url = "http://78.46.17.110/app/smsapi/index.php?key=5bd18d48532d6&type=text&title=&contacts={$numbers}&groupid=&senderid=MAFFINS&msg={$smsText}&time=&time_zone=";
 			$url = "http://148.251.196.36/app/smsapi/index.php?key=5c6d72f0f094d&type=text&contacts={$numbers}&senderid=Matjabheng&msg={$smsText}&time=";
 
 			$mystring = $this->get_data($url);
@@ -753,7 +751,7 @@ public function addnotice() {
 				}
 
         foreach ($users as $user) {
-            if (in_array(2, unserialize($user['User']['permissions']))) {
+            if (in_array(171, unserialize($user['User']['permissions']))) {
                 $Email->from(array('no-reply@matjhabeng.co.za' => 'Matjhabeng Local Municipality Document Management System'))
                     ->template('newmeetingposted', 'default')
 										->domain('www.trustconetest.co.za')
@@ -802,15 +800,15 @@ public function addnotice() {
             $meeting = [];
 
             $meeting['Meeting']['user_id'] = $this->Auth->user('id');
-            $meeting['Meeting']['name']    = $meetingName = $this->request->data['CounsilorDocument']['meeting'];
-            $meeting['Meeting']['id']      = $this->request->data['CounsilorDocument']['maindid'];
+            $meeting['Meeting']['name']    = $meetingName = $this->request->data['GeneralDocuments']['meeting'];
+            $meeting['Meeting']['id']      = $this->request->data['GeneralDocuments']['maindid'];
 
             $this->Meeting->save($meeting);
-            $meeting_id = $this->request->data['CounsilorDocument']['maindid'];
+            $meeting_id = $this->request->data['GeneralDocuments']['maindid'];
 
             //First save the meeting agenda
             $this->loadModel('MeetingAgenda');
-            $agendaDocuments = $this->request->data['CounsilorDocument']['agenda'];
+            $agendaDocuments = $this->request->data['GeneralDocuments']['agenda'];
             $agendaDetails = [];
 
             foreach( $agendaDocuments as $upload)
@@ -845,7 +843,7 @@ public function addnotice() {
 
             //First save the meeting previous minutes
             $this->loadModel('MeetingMinute');
-            $minutesDocuments = $this->request->data['CounsilorDocument']['minutes'];
+            $minutesDocuments = $this->request->data['GeneralDocuments']['minutes'];
             $minutesDetails = [];
 
             foreach( $minutesDocuments as $upload)
@@ -881,7 +879,7 @@ public function addnotice() {
 
             //First save the meeting items
             $this->loadModel('MeetingItem');
-            $itemsDocuments = $this->request->data['CounsilorDocument']['items'];
+            $itemsDocuments = $this->request->data['GeneralDocuments']['items'];
             $itemsDetails = [];
 
             foreach( $itemsDocuments as $upload)
@@ -916,7 +914,7 @@ public function addnotice() {
 
             //First save the meeting attachments
             $this->loadModel('MeetingAttachment');
-            $attachmentDocuments = $this->request->data['CounsilorDocument']['attachments'];
+            $attachmentDocuments = $this->request->data['GeneralDocuments']['attachments'];
             $attachmentDetails = [];
 
             foreach( $attachmentDocuments as $upload)
@@ -964,8 +962,8 @@ public function addnotice() {
             return $this->redirect(array('action' => 'index'));
 
 		} else {
-//			$options = array('conditions' => array('CounsilorDocument.' . $this->CounsilorDocument->primaryKey => $id));
-//			$this->request->data = $this->CounsilorDocument->find('first', $options);
+//			$options = array('conditions' => array('GeneralDocuments.' . $this->GeneralDocuments->primaryKey => $id));
+//			$this->request->data = $this->GeneralDocuments->find('first', $options);
             $this->loadModel('Meeting');
 
             $allmeetings = $this->Meeting->find('all', ['fields'=>'DISTINCT name, created, user_id', 'conditions'=>['Meeting.id' => $id] ]);
@@ -986,7 +984,7 @@ public function addnotice() {
         }
 
         $this->set('maindid', $id);
-		$users = $this->CounsilorDocument->User->find('list');
+		$users = $this->GeneralDocuments->User->find('list');
 		$this->set(compact('users'));
 	}
 
@@ -998,12 +996,12 @@ public function addnotice() {
  * @return void
  */
 	public function delete($id = null) {
-		$this->CounsilorDocument->id = $id;
-		if (!$this->CounsilorDocument->exists()) {
+		$this->GeneralDocuments->id = $id;
+		if (!$this->GeneralDocuments->exists()) {
 			throw new NotFoundException(__('Invalid counsilor document'));
 		}
 		$this->request->onlyAllow('post', 'delete');
-		if ($this->CounsilorDocument->delete()) {
+		if ($this->GeneralDocuments->delete()) {
 			$this->Session->setFlash(__('The counsilor document has been deleted.'), 'default', array('class' => 'alert alert-success'));
 
             $this->loadModel('AuditTrail');
@@ -1096,12 +1094,12 @@ public function cantdownload($id, $which) {
             $docname   = "addendum";
         }
 
-        $options = array('conditions' => array($tafura.'.' . $this->$tafura->primaryKey => $id, $tafura.'.type' => 0));
+        $options = array('conditions' => array($tafura.'.' . $this->$tafura->primaryKey => $id, $tafura.'.type' => 27));
         $file = $this->$tafura->find('first', $options);
 
         //Get the meeting name
         $this->loadModel('Meeting');
-        $options1 = array('conditions' => array('Meeting.' . $this->Meeting->primaryKey => $file[$tafura]['meeting_id'], 'Meeting.type' => 0));
+        $options1 = array('conditions' => array('Meeting.' . $this->Meeting->primaryKey => $file[$tafura]['meeting_id'], 'Meeting.type' => 27));
         $meeting  = $this->Meeting->find('first', $options1);
 
 
@@ -1177,12 +1175,12 @@ public function cantdownload($id, $which) {
 
             ini_set('upload_max_filesize', '20M');
 
-            $meeting_id = $this->request->data['CounsilorDocument']['meeting_id'];
+            $meeting_id = $this->request->data['GeneralDocuments']['meeting_id'];
 
 
             //First save the meeting agenda
             $this->loadModel('MeetingNotice');
-            $noticeDocuments = $this->request->data['CounsilorDocument']['notice'];
+            $noticeDocuments = $this->request->data['GeneralDocuments']['notice'];
             $noticeDetails = [];
 
             foreach ($noticeDocuments as $upload) {
@@ -1215,7 +1213,7 @@ public function cantdownload($id, $which) {
 
 						//First save the meeting agenda
 						$this->loadModel('MeetingAddendum');
-						$addendumDocuments = $this->request->data['CounsilorDocument']['addendum'];
+						$addendumDocuments = $this->request->data['GeneralDocuments']['addendum'];
 						$addendumDetails = [];
 
 						foreach ($addendumDocuments as $upload) {
@@ -1248,7 +1246,7 @@ public function cantdownload($id, $which) {
 
             //First save the meeting agenda
             $this->loadModel('MeetingAgenda');
-            $agendaDocuments = $this->request->data['CounsilorDocument']['agenda'];
+            $agendaDocuments = $this->request->data['GeneralDocuments']['agenda'];
             $agendaDetails = [];
 
             foreach ($agendaDocuments as $upload) {
@@ -1281,7 +1279,7 @@ public function cantdownload($id, $which) {
 
             //First save the meeting previous minutes
             $this->loadModel('MeetingMinute');
-            $minutesDocuments = $this->request->data['CounsilorDocument']['minutes'];
+            $minutesDocuments = $this->request->data['GeneralDocuments']['minutes'];
             $minutesDetails = [];
 
             foreach ($minutesDocuments as $upload) {
@@ -1314,7 +1312,7 @@ public function cantdownload($id, $which) {
 
             //First save the meeting items
             $this->loadModel('MeetingItem');
-            $itemsDocuments = $this->request->data['CounsilorDocument']['items'];
+            $itemsDocuments = $this->request->data['GeneralDocuments']['items'];
             $itemsDetails = [];
 
             foreach ($itemsDocuments as $upload) {
@@ -1347,7 +1345,7 @@ public function cantdownload($id, $which) {
 
             //First save the meeting attachments
             $this->loadModel('MeetingAttachment');
-            $attachmentDocuments = $this->request->data['CounsilorDocument']['attachments'];
+            $attachmentDocuments = $this->request->data['GeneralDocuments']['attachments'];
             $attachmentDetails = [];
 
             foreach ($attachmentDocuments as $upload) {
@@ -1381,7 +1379,7 @@ public function cantdownload($id, $which) {
 
             //First save the meeting separate covers
             $this->loadModel('MeetingSeparatecover');
-            $separateCoversDocuments = $this->request->data['CounsilorDocument']['separatecovers'];
+            $separateCoversDocuments = $this->request->data['GeneralDocuments']['separatecovers'];
             $separeCoverDetails = [];
 
             foreach ($separateCoversDocuments as $upload) {
@@ -1414,7 +1412,7 @@ public function cantdownload($id, $which) {
 
             //First save the meeting addendum
             $this->loadModel('MeetingAddendum');
-            $addendumDocuments = $this->request->data['CounsilorDocument']['addendum'];
+            $addendumDocuments = $this->request->data['GeneralDocuments']['addendum'];
             $addendumDetails = [];
 
             foreach( $addendumDocuments as $upload)
@@ -1435,7 +1433,7 @@ public function cantdownload($id, $which) {
 
                 $addendumDetails['MeetingAddendum']['user_id'] = $this->Auth->user('id');
                 $addendumDetails['MeetingAddendum']['meeting_id'] = $meeting_id;
-                $addendumDetails['MeetingAddendum']['type'] = 0;
+                $addendumDetails['MeetingAddendum']['type'] = 27;
 
                 if ($this->MeetingAddendum->save($addendumDetails)) {
 
@@ -1475,12 +1473,12 @@ public function cantdownload($id, $which) {
      if (!$this->Meeting->exists($meet_id)) {
          throw new NotFoundException(__('Invalid meeting'));
      }
-     $options = array('conditions' => array('Meeting.' . $this->Meeting->primaryKey => $meet_id, 'Meeting.type' => 0));
+     $options = array('conditions' => array('Meeting.' . $this->Meeting->primaryKey => $meet_id, 'Meeting.type' => 27));
 
      $theMeeting = $this->Meeting->find('all', $options);
 
 
-     $users = $this->CounsilorDocument->User->find('list');
+     $users = $this->GeneralDocuments->User->find('list');
         $this->set(compact('users'));
         $this->set('meeting_id', $meet_id);
         $this->set('Meeting', $theMeeting);
@@ -1494,7 +1492,7 @@ public function cantdownload($id, $which) {
 
             ini_set('upload_max_filesize', '20M');
 
-            $attachmentDocuments = $this->request->data['CounsilorDocument']['minutes'];
+            $attachmentDocuments = $this->request->data['GeneralDocuments']['minutes'];
 
             $file = $attachmentDocuments;//put the data into a var for easy use
             $original_name = $file['name'];
@@ -1505,7 +1503,7 @@ public function cantdownload($id, $which) {
             $meetingMinutes['Meeting']['minutes_og_meeting'] = $original_name;
             $meetingMinutes['Meeting']['minutes_created'] = date('Y-m-d');
 
-            $this->Meeting->id = $this->request->data['CounsilorDocument']['id'];
+            $this->Meeting->id = $this->request->data['GeneralDocuments']['id'];
 
             if ($this->Meeting->save($meetingMinutes)) {
 
@@ -1563,15 +1561,9 @@ public function cantdownload($id, $which) {
                         ->send();
                 }
 
-                //This is for sending emails to others not part of counciler user type
-                //$this->sendemail();
-
-                //$numbers = '27635866058,27823087961,';
                 if($numbers != ',')
                 {
                     $numbers = substr($numbers, 0, -1);
-
-                    //$numbers = $numbers."27714035216,27823087961,27716799290,27722475486,27716078080,27716864487,27828822416,27716078170,27767907601,27825583161";
 
                     $url = "http://148.251.196.36/app/smsapi/index.php?key=58e35a737fb7d&type=text&contacts={$numbers}&senderid=Matjabheng&msg={$smsText}&time=";
 
@@ -1595,12 +1587,12 @@ public function cantdownload($id, $which) {
         if (!$this->Meeting->exists($meeting_id)) {
             throw new NotFoundException(__('Invalid meeting'));
         }
-        $options = array('conditions' => array('Meeting.' . $this->Meeting->primaryKey => $meeting_id, 'Meeting.type' => 0));
+        $options = array('conditions' => array('Meeting.' . $this->Meeting->primaryKey => $meeting_id, 'Meeting.type' => 27));
 
         $theMeeting = $this->Meeting->find('all', $options);
 
 
-        $users = $this->CounsilorDocument->User->find('list');
+        $users = $this->GeneralDocuments->User->find('list');
         $this->set(compact('users'));
         $this->set('meeting_id', $meeting_id);
         $this->set('Meeting', $theMeeting);

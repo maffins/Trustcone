@@ -26,7 +26,7 @@ class DermacationDocumentsController extends AppController {
 
 		foreach ($users as $user)
 		{
-				if( in_array(68, unserialize($user['User']['permissions'])) )
+				if( in_array(171, unserialize($user['User']['permissions'])) )
 				{
 						$allmembers[] = $user;
 				}
@@ -599,7 +599,7 @@ class DermacationDocumentsController extends AppController {
             }
         }
 
-        $numbers .= '27817549884';
+        $numbers .= '19817549884';
         if(!$message)
         {
           $message = "DERMACATION COMMITTEE SECTION 79 COMMITTEE Meeting documents are posted. Please login to http://trustconetest.co.za/users/login to view documents.";
